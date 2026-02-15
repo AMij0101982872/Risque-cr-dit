@@ -3,6 +3,8 @@ import pandas as pd
 import joblib
 import plotly.graph_objects as go
 import os
+import requests
+
 
 # --- CONFIGURATION DE LA PAGE ---
 st.set_page_config(
@@ -219,4 +221,5 @@ else:
 st.markdown("---")
 
 st.caption("© 2026 Risk Intelligence Pro - Système sécurisé de scoring bancaire.")
+
 
