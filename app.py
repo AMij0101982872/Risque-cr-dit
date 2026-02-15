@@ -1,9 +1,10 @@
+import requests
 import streamlit as st
 import pandas as pd
 import joblib
 import plotly.graph_objects as go
 import os
-import requests
+
 
 
 # --- CONFIGURATION DE LA PAGE ---
@@ -89,20 +90,24 @@ MODEL_PATH = "credit_risk_model.pkl"
 @st.cache_resource
 def load_model():
     try:
-        # Télécharger si nécessaire
         if not os.path.exists(MODEL_PATH):
             st.info("📥 Téléchargement du modèle...")
             r = requests.get(MODEL_URL)
-            with open(MODEL_PATH, "wb") as f:
-                f.write(r.content)
-            st.success("✅ Modèle téléchargé !")
+            if r.status_code == 200:
+                with open(MODEL_PATH, "wb") as f:
+                    f.write(r.content)
+                st.success("✅ Modèle téléchargé !")
+            else:
+                st.error(f"❌ Impossible de télécharger le modèle. Status code: {r.status_code}")
+                return None
 
-        # Charger le modèle
         model = joblib.load(MODEL_PATH)
         return model
     except Exception as e:
-        st.error(f"❌ Impossible de charger le modèle : {e}")
+        st.error(f"❌ Erreur lors du chargement du modèle : {e}")
         return None
+
+model = load_model()
 
 
 # --- LOGIQUE DE PRÉDICTION ---
@@ -230,6 +235,7 @@ else:
 st.markdown("---")
 
 st.caption("© 2026 Risk Intelligence Pro - Système sécurisé de scoring bancaire.")
+
 
 
 
