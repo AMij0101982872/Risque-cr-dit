@@ -87,28 +87,18 @@ MODEL_PATH = os.path.join(os.getcwd(), "credit_risk_model.pkl")
 MODEL_URL = "https://drive.google.com/uc?export=download&id=1r18X2X_kDJ_mrJ7z193SNOtOyGUwI4Ve"
 MODEL_PATH = "credit_risk_model.pkl"
 
-@st.cache_resource
 def load_model():
     try:
-        if not os.path.exists(MODEL_PATH):
-            st.info("📥 Téléchargement du modèle...")
-            r = requests.get(MODEL_URL)
-            if r.status_code == 200:
-                with open(MODEL_PATH, "wb") as f:
-                    f.write(r.content)
-                st.success("✅ Modèle téléchargé !")
-            else:
-                st.error(f"❌ Impossible de télécharger le modèle. Status code: {r.status_code}")
-                return None
-
-        model = joblib.load(MODEL_PATH)
+        # Ouvrir le fichier compressé
+        with gzip.open("credit_risk_model_compressé.pkl.gz", "rb") as f:
+            model = joblib.load(f)
         return model
     except Exception as e:
-        st.error(f"❌ Erreur lors du chargement du modèle : {e}")
+        st.error(f"Erreur lors du chargement du modèle : {e}")
         return None
 
+# Charger le modèle une seule fois (cache)
 model = load_model()
-
 
 # --- LOGIQUE DE PRÉDICTION ---
 def predict_risk(data):
@@ -235,6 +225,7 @@ else:
 st.markdown("---")
 
 st.caption("© 2026 Risk Intelligence Pro - Système sécurisé de scoring bancaire.")
+
 
 
 
