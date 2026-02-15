@@ -81,11 +81,19 @@ st.markdown("""
 MODEL_PATH = os.path.join(os.getcwd(), "credit_risk_model.pkl")
 
 # --- CHARGEMENT DU MODÈLE AVEC CACHE ---
+MODEL_PATH = "credit_risk_model.pkl"
+MODEL_URL = "https://drive.google.com/uc?export=download&id=1r18X2X_kDJ_mrJ7z193SNOtOyGUwI4Ve"
+
 @st.cache_resource
 def load_model():
+    # Télécharger le modèle si absent
     if not os.path.exists(MODEL_PATH):
-        st.error(f"❌ Erreur : Le fichier '{MODEL_PATH}' est introuvable dans le container.")
-        return None
+        st.info("📥 Téléchargement du modèle...")
+        r = requests.get(MODEL_URL)
+        with open(MODEL_PATH, "wb") as f:
+            f.write(r.content)
+        st.success("✅ Modèle téléchargé !")
+    # Charger le modèle
     model = joblib.load(MODEL_PATH)
     return model
 
@@ -214,4 +222,5 @@ else:
 
 # --- FOOTER ---
 st.markdown("---")
+
 st.caption("© 2026 Risk Intelligence Pro - Système sécurisé de scoring bancaire.")
