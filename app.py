@@ -86,16 +86,20 @@ st.markdown("""
 @st.cache_resource
 def load_model():
     try:
-        # Ouvrir le fichier compressé
+        import gzip
+        import joblib
+
+        # Ouvre le fichier compressé
         with gzip.open("credit_risk_model_compressé.pkl.gz", "rb") as f:
-            model = joblib.load(f)
-        return model
+            model_loaded = joblib.load(f)
+        return model_loaded
     except Exception as e:
-        st.error(f"Erreur lors du chargement du modèle : {e}")
+        st.error(f"Erreur de chargement du modèle : {e}")
         return None
 
-# Charger le modèle une seule fois (cache)
 model = load_model()
+st.write("Type du modèle :", type(model))
+
 
 # --- LOGIQUE DE PRÉDICTION ---
 def predict_risk(data):
@@ -221,3 +225,4 @@ else:
 # --- FOOTER ---
 st.markdown("---")
 st.caption("© 2026 Risk Intelligence Pro - Système sécurisé de scoring bancaire.")
+
