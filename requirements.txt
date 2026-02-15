@@ -6,4 +6,5 @@ matplotlib
 seaborn
 imblearn
 plotly
+requests
 imbalanced-learn
