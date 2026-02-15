@@ -180,7 +180,9 @@ else:
             
             risk_proba = predict_risk(input_data)
             risk_percent = risk_proba * 100
-            
+            st.write("Type du modèle :", type(model))
+            st.write("Méthodes disponibles :", dir(model))
+
             # Détermination de la couleur
             color = "#16a34a" if risk_percent < 30 else "#f59e0b" if risk_percent < 70 else "#dc2626"
             label = "CONFIANCE ÉLEVÉE" if risk_percent < 30 else "VIGILANCE REQUISE" if risk_percent < 70 else "ALERTE DÉFAUT"
@@ -226,6 +228,7 @@ else:
 st.markdown("---")
 
 st.caption("© 2026 Risk Intelligence Pro - Système sécurisé de scoring bancaire.")
+
 
 
 
