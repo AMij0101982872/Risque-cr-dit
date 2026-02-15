@@ -86,20 +86,42 @@ st.markdown("""
 @st.cache_resource
 def load_model():
     try:
-        import gzip
-        import joblib
+        # Fichiers compressés
+        pipeline_path = "credit_risk_model_compressé.pkl.gz"
+        features_path = "model_credit.pkl"
 
-        # Ouvre le fichier compressé
-        with gzip.open("credit_risk_model_compressé.pkl.gz", "rb") as f:
-            model_loaded = joblib.load(f)
-        return model_loaded
+        # Vérification des fichiers
+        if not os.path.exists(pipeline_path):
+            st.error(f"Le fichier {pipeline_path} est introuvable !")
+            return None, None
+        if not os.path.exists(features_path):
+            st.error(f"Le fichier {features_path} est introuvable !")
+            return None, None
+
+        # Charger le pipeline
+        with gzip.open(pipeline_path, "rb") as f:
+            pipeline = joblib.load(f)
+
+        # Charger les colonnes utilisées
+        selected_features = joblib.load(features_path)
+
+        # Vérification du pipeline
+        if not hasattr(pipeline, "predict_proba"):
+            st.warning("Attention : le pipeline chargé n'a pas de méthode predict_proba !")
+
+        return pipeline, selected_features
+
     except Exception as e:
         st.error(f"Erreur de chargement du modèle : {e}")
-        return None
+        return None, None
 
-model = load_model()
-st.write("Type du modèle :", type(model))
+# Charger pipeline + colonnes
+pipeline, selected_features = load_model()
 
+# Vérification
+if pipeline is not None and selected_features is not None:
+    st.write("Pipeline chargé :", type(pipeline))
+    st.write("Colonnes utilisées :", selected_features)
 
 # --- LOGIQUE DE PRÉDICTION ---
 def predict_risk(data):
@@ -225,4 +247,5 @@ else:
 # --- FOOTER ---
 st.markdown("---")
 st.caption("© 2026 Risk Intelligence Pro - Système sécurisé de scoring bancaire.")
+
 
