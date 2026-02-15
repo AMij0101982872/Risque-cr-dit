@@ -8,3 +8,4 @@ imblearn
 plotly
 requests
 imbalanced-learn
+gzip
