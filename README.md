@@ -1,83 +1,49 @@
-Risk Intelligence Dashboard
-🛡️ Qu’est-ce que c’est ?
+# Risk Intelligence Dashboard
 
-Risk Intelligence Dashboard est un outil interactif permettant aux banques et institutions financières de prévoir le risque de défaut de paiement d’un client.
+## 🛡️ Qu’est-ce que c’est ?
 
-Grâce à une interface claire et des graphiques visuels, les décideurs peuvent rapidement comprendre le niveau de risque et prendre des décisions éclairées pour l’octroi de crédits.
+**Risk Intelligence Dashboard** est un outil interactif permettant aux banques et institutions financières de **prévoir le risque de défaut de paiement d’un client**.  
 
-🎯 Objectifs du projet
+Grâce à une interface claire et des graphiques visuels, les décideurs peuvent rapidement comprendre le **niveau de risque** et prendre des décisions éclairées pour l’octroi de crédits.
 
-Réduire le risque financier : anticiper les clients susceptibles de ne pas rembourser.
+---
 
-Faciliter la prise de décision : interface intuitive avec visualisations simples.
+## 🎯 Objectifs du projet
 
-Automatiser l’évaluation de risque : transformer des données brutes en score clair et actionnable.
+1. **Réduire le risque financier** : anticiper les clients susceptibles de ne pas rembourser.  
+2. **Faciliter la prise de décision** : interface intuitive avec visualisations simples.  
+3. **Automatiser l’évaluation de risque** : transformer des données brutes en score clair et actionnable.  
 
-🧩 Fonctionnalités
+---
 
-Formulaire pour entrer les informations client :
+## 🧩 Fonctionnalités
 
-Limite de crédit, âge, sexe, statut marital.
+- Formulaire pour entrer les informations client :  
+  - Limite de crédit, âge, sexe, statut marital.  
+  - Historique de paiements : retards, montant de facture, dernier paiement.  
+- Prédiction du **risque de défaut** à l’aide d’un **modèle Random Forest**.  
+- Visualisation du score sous forme de **jauge interactive** avec couleur selon le niveau de risque.  
+- Recommandations automatiques :  
+  - **Risque faible** → approbation recommandée  
+  - **Risque moyen** → dossier à surveiller  
+  - **Risque élevé** → attention, garanties supplémentaires nécessaires  
 
-Historique de paiements : retards, montant de facture, dernier paiement.
+---
 
-Prédiction du risque de défaut à l’aide d’un modèle Random Forest.
+## 🧠 Choix techniques
 
-Visualisation du score sous forme de jauge interactive avec couleur selon le niveau de risque.
+- **Langage :** Python  
+- **Interface :** Streamlit (dashboard web interactif)  
+- **Graphiques :** Plotly (jauge interactive, KPI visuels)  
+- **Gestion de données :** Pandas  
+- **Modèle prédictif :** Random Forest  
+  - Robuste face aux erreurs ou valeurs manquantes  
+  - Combinaison de plusieurs “arbres de décision” pour une prédiction fiable  
+- **Optimisation :** Cache pour accélérer le chargement du modèle  
 
-Recommandations automatiques :
+---
 
-Risque faible → approbation recommandée
-
-Risque moyen → dossier à surveiller
-
-Risque élevé → attention, garanties supplémentaires nécessaires
-
-🧠 Choix techniques
-
-Langage : Python
-
-Interface : Streamlit (dashboard web interactif)
-
-Graphiques : Plotly (jauge interactive, KPI visuels)
-
-Gestion de données : Pandas
-
-Modèle prédictif : Random Forest
-
-Robuste face aux erreurs ou valeurs manquantes
-
-Combinaison de plusieurs “arbres de décision” pour une prédiction fiable
-
-Optimisation : Cache pour accélérer le chargement du modèle
-
-🚀 Comment utiliser le projet
-Installation locale
-
-Cloner le projet :
-
-git clone https://github.com/TON_UTILISATEUR/risque-cr-dit.git
-cd risque-cr-dit
-
-
-Installer les dépendances :
-
-pip install -r requirements.txt
-
-
-Lancer l’application :
-
-streamlit run app.py
-
-Utilisation
-
-Remplir les informations du client dans le formulaire.
-
-Cliquer sur “Lancer l’analyse prédictive”.
-
-Observer le score de risque et la recommandation.
-
-🎨 Choix de design
+ Choix de design
 
 Interface moderne et épurée avec cartes et en-tête stylisé.
 
@@ -87,16 +53,16 @@ Couleurs intuitives pour signaler le niveau de risque : vert = faible, orange = 
 
 Disposition en colonnes pour afficher formulaire et résultats côte à côte.
 
-📌 Remarques importantes
+ Remarques importantes
 
 Le modèle peut être volumineux (>25 MB), il peut être stocké séparément ou téléchargé dynamiquement.
 
 L’application est conçue pour être responsive et interactive, offrant une expérience proche d’un produit professionnel.
 
-👨‍💻 Auteur
+ Auteur
 
 Ake Mobio Ivan Junior
 
-Email : ton.email@example.com
+Email : akeivanjr10@gmail.com
 
-Portfolio / GitHub : https://github.com/TON_UTILISATEUR
+
